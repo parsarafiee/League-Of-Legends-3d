@@ -6,32 +6,42 @@ using UnityEngine.AI;
 public class Agent : MonoBehaviour
 {
 
-    static int numberOfAgents;
-    const int SlimeMax = 10;
-    Vector2 timeToSpawn = new Vector2(10, 30);
-    float timeOfSplit;
+
     NavMeshAgent agent;
-    public Player targerPlayer;
+    public GameObject targerPlayer;
+    public float radius=100;
+    public Transform destination;
 
     private void Awake()
     {
-        numberOfAgents++;
         agent = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
-        timeOfSplit = Time.deltaTime + Random.Range(timeToSpawn.x, timeToSpawn.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Time.time >timeOfSplit&& numberOfAgents<SlimeMax)
+        //RaycastHit hit;
+        //if (Physics.SphereCast(transform.position,radius,, out hit, 10))
         //{
-        //    SplitSlime();
-        //    timeOfSplit = Time.time + Random.Range(timeToSpawn.x, timeToSpawn.y);
 
         //}
+        foreach (Collider c in Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player")))
+        {
+            if (c)
+            {
+                Debug.Log("hi");
+                targerPlayer = c.gameObject;
+            }
+            else
+            {
+                SetDestination(destination);
+                targerPlayer = null;
+            }
+
+        }
 
         if (targerPlayer)
         {
@@ -39,16 +49,14 @@ public class Agent : MonoBehaviour
         }
         else
         {
-            agent.SetDestination(new Vector3(0,0,0));
+            agent.SetDestination(destination.position);
         }
         
     }
-
-    private void SplitSlime()
+    public void SetDestination(Transform _destination)
     {
-        GameObject newAgent = GameObject.Instantiate(gameObject);
-        newAgent.GetComponent<NavMeshAgent>().Move(new Vector3(50, 0, 50));
-
-
+        destination = _destination;
     }
+
+
 }

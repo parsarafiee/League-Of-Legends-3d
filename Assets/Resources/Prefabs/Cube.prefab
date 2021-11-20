@@ -132,3 +132,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targerPlayer: {fileID: 0}
+  radius: 10

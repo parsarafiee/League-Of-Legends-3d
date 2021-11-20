@@ -5,33 +5,38 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    float timeOfSplit;
-    static int numberOfAgents;
+    static int numberOfAgents=5;
     const int SlimeMax = 10;
-    Vector2 timeToSpawn = new Vector2(10, 30);
+    public float timeToSpawn = 15f;
     public GameObject agent;
+    public Transform ResownPoint;
+    public Transform Destination;
     // Start is called before the first frame update
     void Start()
     {
-        timeOfSplit = Time.deltaTime + Random.Range(timeToSpawn.x, timeToSpawn.y);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > timeOfSplit && numberOfAgents < SlimeMax)
+        if (Time.time > timeToSpawn)
         {
-            SplitSlime();
-            timeOfSplit = Time.time + Random.Range(timeToSpawn.x, timeToSpawn.y);
-
+            RespawnUnits(numberOfAgents);
+            timeToSpawn += timeToSpawn;
         }
     }
-    private void SplitSlime()
+    private void RespawnUnits(int numb)
     {
-        GameObject newAgent = GameObject.Instantiate(agent);
-        newAgent.GetComponent<NavMeshAgent>().Move(new Vector3(50, 0, 50));
+        
+        for (int i = 0; i < numb; i++)
+        {
+            GameObject newAgent = GameObject.Instantiate(agent, ResownPoint.position,Quaternion.identity);
+            newAgent.GetComponent<NavMeshAgent>().Move(new Vector3(ResownPoint.position.x, 0, ResownPoint.position.z));
+            newAgent.GetComponent<Agent>().SetDestination(Destination);
+        }
 
 
     }
+
 }
