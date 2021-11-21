@@ -8,8 +8,9 @@ public class Agent : MonoBehaviour
 
 
     NavMeshAgent agent;
-    public GameObject targerPlayer;
+    public GameObject target;
     public float radius=100;
+    public float rangeToDmage;
     public Transform destination;
 
     private void Awake()
@@ -23,40 +24,51 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //RaycastHit hit;
-        //if (Physics.SphereCast(transform.position,radius,, out hit, 10))
-        //{
+        CheckTofindEnemy();
 
-        //}
-        foreach (Collider c in Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player")))
+        if (Vector3.Distance( transform.position,target.transform.position)< rangeToDmage)
         {
-            if (c)
-            {
-                Debug.Log("hi");
-                targerPlayer = c.gameObject;
-            }
-            else
-            {
-                SetDestination(destination);
-                targerPlayer = null;
-            }
-
+            DealDmage(target);
         }
 
-        if (targerPlayer)
-        {
-            agent.SetDestination(targerPlayer.transform.position);
-        }
-        else
-        {
-            agent.SetDestination(destination.position);
-        }
-        
+
     }
     public void SetDestination(Transform _destination)
     {
         destination = _destination;
     }
+    public void CheckTofindEnemy()
+    {
+        foreach (Collider c in Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Player")))
+        {
+            if (c)
+            {
+                Debug.Log("hi");
+                target = c.gameObject;
+            }
 
+
+        }
+
+
+        if (target)
+        {
+            agent.SetDestination(target.transform.position);
+            if (Vector3.Distance(transform.position, target.transform.position) > radius)
+            {
+                target = null;
+            }
+
+        }
+        else
+        {
+            agent.SetDestination(destination.position);
+        }
+    }
+
+    public void DealDmage(GameObject _target)
+    {
+
+    }
 
 }

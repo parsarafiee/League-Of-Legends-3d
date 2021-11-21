@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    static int numberOfAgents=5;
+    static int numberOfAgents=1;
     const int SlimeMax = 10;
     public float timeToSpawn = 15f;
     public GameObject agent;
