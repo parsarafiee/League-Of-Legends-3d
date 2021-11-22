@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b9c7a91f83ed94aa20f5da2f7be974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToSpawn: 1
-  agent: {fileID: 6637961171381061673, guid: c3044562c59e9db41a4f9c25f7ece29c, type: 3}
+  timeToSpawn: 10
+  agent: {fileID: 1260708833109909403, guid: 34730842c8fcd624b994520dd82f5315, type: 3}
   ResownPoint: {fileID: 639094073}
   Destination: {fileID: 297464685}
 --- !u!4 &333468879
@@ -559,7 +559,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867875199}
-  m_Layer: 0
+  - component: {fileID: 1867875200}
+  m_Layer: 8
   m_Name: ObjectToHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,6 +581,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867875200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867875198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42d4675106fa154883ac31de39f2668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
 --- !u!1001 &7520430328902557815
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class Agent : MonoBehaviour
     public float radius=100;
     public float rangeToDmage;
     public Transform destination;
+    public float damage=10;
+    public float timeToDamage = 1;
 
     private void Awake()
     {
@@ -25,11 +27,15 @@ public class Agent : MonoBehaviour
     void Update()
     {
         CheckTofindEnemy();
-
-        if (Vector3.Distance( transform.position,target.transform.position)< rangeToDmage)
+        if (target)
         {
-            DealDmage(target);
+            if (Vector3.Distance(transform.position, target.transform.position) < rangeToDmage)
+            {
+                DealDmage(target);
+            }
+
         }
+
 
 
     }
@@ -68,7 +74,7 @@ public class Agent : MonoBehaviour
 
     public void DealDmage(GameObject _target)
     {
-
+        _target.GetComponent<Hp>().AbsorbTheDmage(damage);
     }
 
 }

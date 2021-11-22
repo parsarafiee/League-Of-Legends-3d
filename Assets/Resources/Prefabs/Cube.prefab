@@ -131,5 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6871c55d65b450d4a85973672d5b01e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targerPlayer: {fileID: 0}
+  target: {fileID: 0}
   radius: 10
+  rangeToDmage: 4
+  destination: {fileID: 0}
+  damage: 10
+  timeToDamage: 1
