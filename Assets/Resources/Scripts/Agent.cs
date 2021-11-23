@@ -9,10 +9,10 @@ public class Agent : MonoBehaviour
 
     NavMeshAgent agent;
     public GameObject target;
-    public float radius=100;
+    public float radius = 100;
     public float rangeToDmage;
     public Transform destination;
-    public float damage=10;
+    public float damage = 10;
     public float timeToDamage = 1;
 
     private void Awake()
@@ -75,6 +75,11 @@ public class Agent : MonoBehaviour
     public void DealDmage(GameObject _target)
     {
         _target.GetComponent<Hp>().AbsorbTheDmage(damage);
+    }
+
+    public void SetDamage(int _damage)
+    {
+        damage = _damage;
     }
 
 }

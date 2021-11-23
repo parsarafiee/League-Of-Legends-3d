@@ -5,16 +5,20 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    static int numberOfAgents=10;
+    public int numberOfAgents=10;
+    public int agentDamage=10;
     const int SlimeMax = 10;
-    public float timeToSpawn = 15f;
+    public float timeToSpawn = 2f;
     public GameObject agent;
     public Transform ResownPoint;
     public Transform Destination;
+
+
+    float timer ;
     // Start is called before the first frame update
     void Start()
     {
-
+        timer = timeToSpawn;
     }
 
     // Update is called once per frame
@@ -23,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (Time.time > timeToSpawn)
         {
             RespawnUnits(numberOfAgents);
-            timeToSpawn += timeToSpawn;
+            timeToSpawn = Time.time + timer;
         }
     }
     private void RespawnUnits(int numb)
@@ -34,6 +38,7 @@ public class GameManager : MonoBehaviour
             GameObject newAgent = GameObject.Instantiate(agent, ResownPoint.position,Quaternion.identity);
             newAgent.GetComponent<NavMeshAgent>().Move(new Vector3(ResownPoint.position.x, 0, ResownPoint.position.z));
             newAgent.GetComponent<Agent>().SetDestination(Destination);
+            newAgent.GetComponent<Agent>().SetDamage(agentDamage);
         }
 
 
